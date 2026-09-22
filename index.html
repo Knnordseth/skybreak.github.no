@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skybreak, hand-printed shirts</title>
+<meta name="description" content="Skybreak: a small, hand-printed run of shirts. Preview catalogue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<!-- only the kanji the poster uses, so the Japanese font stays tiny -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&text=%E4%B8%80%E7%82%B9%E7%89%A9%E7%94%9F%E3%81%8D%E7%94%B2%E6%96%90%E3%81%84%E3%81%8C&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="hero-sun-clip" clipPathUnits="objectBoundingBox">
+        <path class="sun-path" d="M1,0.13 L0.512,0.168 L0.785,0.205 L0.232,0.262 L0.608,0.298 L0.175,0.351 L0.691,0.392 L0.063,0.436 L0.474,0.478 L0.712,0.521 L0.037,0.565 L0.611,0.612 L0.170,0.658 L0.715,0.702 L0.250,0.751 L0.733,0.795 L0.569,0.838 L1,0.87 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="descent">
+    <nav class="nav">
+      <a class="nav__mark" href="#top">Skybreak</a>
+      <a class="nav__link" href="#catalogue">Catalogue</a>
+      <a class="nav__link" href="#tattoos">Tattoos</a>
+      <a class="nav__link" href="#art">Art</a>
+      <a class="nav__link" href="#process">Process</a>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="hero__backdrop" aria-hidden="true"></div>
+      <img class="hero__asuka" src="Images/Asuka-drawing.jpg" alt="" aria-hidden="true">
+
+      <svg class="hero__icon hero__icon--sigil" aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.25">
+        <circle cx="50" cy="50" r="34" />
+        <circle cx="50" cy="50" r="18" />
+        <path d="M50 10 L50 90 M10 50 L90 50" />
+      </svg>
+      <svg class="hero__icon hero__icon--mecha" aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.25">
+        <rect x="20" y="20" width="60" height="60" rx="2" />
+        <path d="M20 50 L80 50 M50 20 L50 80" />
+      </svg>
+      <svg class="hero__icon hero__icon--stand" aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.25">
+        <path d="M15 85 L85 15 M15 55 L55 15" />
+      </svg>
+      <svg class="hero__icon hero__icon--climb" aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.25">
+        <path d="M10 80 L38 34 L52 56 L66 26 L92 80 Z" />
+        <path d="M66 26 L66 12" />
+      </svg>
+
+      <div class="hero__reveal" aria-hidden="true">
+        <img class="hero__reveal-img" src="Images/jjba-drawing.jpg" alt="">
+        <div class="hero__reveal-light"></div>
+      </div>
+
+      <div class="hero__text">
+        <p class="hero__eyebrow">Custom, one of one</p>
+        <h1 class="hero__title">One print. One shirt. Never again.</h1>
+        <p class="hero__tagline">Each piece is hand-printed once, in a single small run, then retired for good.</p>
+        <a class="hero__cue" href="#catalogue" aria-label="Scroll to catalogue">
+          <span aria-hidden="true">&#8595;</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="catalogue" id="catalogue">
+      <!-- fisheye guides and a sketch left in its underdrawing, the page's working-out showing through -->
+      <div class="catalogue__backdrop" aria-hidden="true">
+        <svg class="catalogue__guides" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" fill="none">
+          <ellipse cx="800" cy="560" rx="218" ry="980" />
+          <ellipse cx="800" cy="560" rx="425" ry="980" />
+          <ellipse cx="800" cy="560" rx="611" ry="980" />
+          <ellipse cx="800" cy="560" rx="766" ry="980" class="catalogue__guide--red" />
+          <ellipse cx="800" cy="560" rx="883" ry="980" />
+          <ellipse cx="800" cy="560" rx="955" ry="980" />
+          <ellipse cx="800" cy="560" rx="1274" ry="153" />
+          <ellipse cx="800" cy="560" rx="1274" ry="298" />
+          <ellipse cx="800" cy="560" rx="1274" ry="428" />
+          <ellipse cx="800" cy="560" rx="1274" ry="536" />
+          <ellipse cx="800" cy="560" rx="1274" ry="618" class="catalogue__guide--red" />
+          <ellipse cx="800" cy="560" rx="1274" ry="669" />
+          <path d="M800 0 V1000 M0 560 H1600" />
+        </svg>
+        <div class="catalogue__sketch">
+          <span class="catalogue__sketch-red"></span>
+          <span class="catalogue__sketch-line"></span>
+        </div>
+      </div>
+      <h2 class="catalogue__heading">The catalogue</h2>
+      <div class="wheel">
+        <svg class="wheel__ring" aria-hidden="true" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.6">
+          <defs>
+            <g id="mhg-spoke">
+              <path d="M100 70 L100 26" />
+              <path d="M100 9 L107 31 L100 25 L93 31 Z" fill="currentColor" stroke="none" />
+              <path d="M100 86 L100 75" transform="rotate(22.5 100 100)" />
+            </g>
+          </defs>
+          <circle cx="100" cy="100" r="93" />
+          <circle cx="100" cy="100" r="86" stroke-width="1" />
+          <circle cx="100" cy="100" r="31" />
+          <circle cx="100" cy="100" r="20" stroke-width="1" />
+          <circle cx="100" cy="100" r="7" fill="currentColor" stroke="none" />
+          <use href="#mhg-spoke" />
+          <use href="#mhg-spoke" transform="rotate(45 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(90 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(135 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(180 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(225 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(270 100 100)" />
+          <use href="#mhg-spoke" transform="rotate(315 100 100)" />
+        </svg>
+        <img class="wheel__center" src="Images/Giorno.jpg" alt="" aria-hidden="true">
+        <div class="grid" id="grid"></div>
+      </div>
+    </main>
+
+    <section class="flash" id="tattoos">
+      <!-- the herd never stops: gallop frames cycle while each horse crosses and loops -->
+      <div class="herd" aria-hidden="true">
+        <div class="herd__horse" style="--size: 9rem; --lane: 6%; --dur: 26s; --delay: -3s; --phase: 0s; --rest: 8%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+        <div class="herd__horse" style="--size: 15rem; --lane: 58%; --dur: 15s; --delay: -9s; --phase: -0.17s; --rest: 52%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+        <div class="herd__horse" style="--size: 11rem; --lane: 24%; --dur: 21s; --delay: -14s; --phase: -0.31s; --rest: 70%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+        <div class="herd__horse" style="--size: 13rem; --lane: 76%; --dur: 18s; --delay: -2s; --phase: -0.08s; --rest: 4%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+        <div class="herd__horse" style="--size: 10rem; --lane: 40%; --dur: 24s; --delay: -19s; --phase: -0.24s; --rest: 80%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+        <div class="herd__horse" style="--size: 12rem; --lane: 88%; --dur: 19s; --delay: -12s; --phase: -0.4s; --rest: 40%"><span class="herd__frame"></span><span class="herd__frame"></span><span class="herd__frame"></span></div>
+      </div>
+      <!-- pose studies pinned to the sheet's margins, like figure drafts for the flash -->
+      <span class="flash__study flash__study--64" aria-hidden="true"></span>
+      <span class="flash__study flash__study--crawl" aria-hidden="true"></span>
+
+      <div class="flash__head">
+        <div class="flash__mark" aria-hidden="true">
+          <span class="flash__sun"></span>
+          <span class="flash__kanji" lang="ja">一生</span>
+        </div>
+        <h2 class="flash__heading">Tattoos</h2>
+        <p class="flash__intro">Designs drawn for skin, pinned up the way a parlour sheet is. Claim a number and it comes off the sheet for good. Sizing is a starting point, your artist adjusts to fit.</p>
+      </div>
+      <div class="flash__sheet" id="flash-sheet"></div>
+      <p class="flash__note">Quotes and placement are worked out with your artist. Bring the number.</p>
+    </section>
+
+    <section class="editions" id="art">
+      <!-- ink textures for the indigo wall: bleed roughens edges like wet
+           paper, marble drags stripes into suminagashi swirls -->
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+        <defs>
+          <filter id="ink-bleed" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="2" result="warp" />
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" />
+          </filter>
+          <filter id="ink-marble" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.009 0.018" numOctaves="2" seed="9" result="warp" />
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="70" />
+          </filter>
+          <!-- stops take their colour from CSS; currentColor inside defs would
+               resolve against the defs, not the print using them -->
+          <radialGradient id="wash" cx="0.42" cy="0.4" r="0.6">
+            <stop offset="0" class="wash-stop" stop-opacity="0.12" />
+            <stop offset="0.7" class="wash-stop" stop-opacity="0.5" />
+            <stop offset="1" class="wash-stop" stop-opacity="0.85" />
+          </radialGradient>
+          <pattern id="marble-stripes" width="40" height="22" patternUnits="userSpaceOnUse">
+            <rect width="40" height="11" class="marble-stripe" />
+          </pattern>
+        </defs>
+      </svg>
+
+      <div class="editions__mural" aria-hidden="true"></div>
+
+      <div class="editions__head">
+        <p class="editions__eyebrow">Art</p>
+        <h2 class="editions__heading">
+          <span class="editions__word" lang="ja">生き甲斐</span>
+          <span class="visually-hidden">Art</span>
+        </h2>
+        <p class="editions__reading"><span lang="ja">(いきがい)</span> <em>noun</em></p>
+        <p class="editions__intro">a reason for being. Original drawings, printed once and signed by hand, the thing that gets us up in the morning. Scroll the wall.</p>
+
+      </div>
+
+      <div class="editions__rail" tabindex="0" role="region" aria-label="Art, scrollable">
+        <figure class="edition edition--tall">
+          <div class="edition__frame">
+            <svg class="edition__plate" aria-hidden="true" viewBox="0 0 250 350" preserveAspectRatio="xMidYMid slice">
+              <!-- a great wave curling over a small peak -->
+              <g class="edition__ink" fill="none" stroke-width="3" stroke-linecap="round" filter="url(#ink-bleed)">
+                <path d="M10 300 C40 230 70 170 128 140 C170 118 214 128 226 160 C234 182 214 202 192 196 C176 192 172 172 188 166" />
+                <path d="M24 300 C52 240 82 186 132 160 C166 142 200 148 208 168 C212 180 202 188 192 184" />
+                <path d="M38 300 C64 252 94 204 136 180 C160 166 186 168 192 180" />
+                <path d="M54 300 C76 262 104 224 140 202 C156 192 172 192 178 198" />
+                <path d="M188 166 C196 150 214 150 220 142 M200 190 C212 186 222 178 226 170" />
+                <path d="M0 316 C60 300 120 318 180 304 C210 298 236 304 250 300" />
+                <path d="M0 332 C70 320 130 336 190 324 C220 318 240 322 250 320" />
+                <path d="M150 300 L172 268 L194 300" stroke-width="1.8" />
+              </g>
+              <g class="edition__ink-fill" filter="url(#ink-bleed)">
+                <circle cx="206" cy="132" r="3" /><circle cx="218" cy="146" r="2.4" /><circle cx="196" cy="120" r="2" />
+                <circle cx="228" cy="126" r="2.2" /><circle cx="212" cy="112" r="1.6" /><circle cx="186" cy="110" r="1.4" />
+              </g>
+              <circle cx="60" cy="70" r="24" class="edition__sun" />
+            </svg>
+          </div>
+          <figcaption class="edition__placard">
+            <span class="edition__title">Break Line</span>
+            <span class="edition__meta">Screenprint on cotton rag</span>
+            <span class="edition__meta">50 x 70 cm</span>
+            <span class="edition__status">Available</span>
+          </figcaption>
+        </figure>
+
+        <figure class="edition edition--square">
+          <div class="edition__frame">
+            <div class="edition__plate edition__plate--sketch edition__plate--point" aria-hidden="true"></div>
+          </div>
+          <figcaption class="edition__placard">
+            <span class="edition__title">Unit Study</span>
+            <span class="edition__meta">Ink and graphite</span>
+            <span class="edition__meta">30 x 40 cm</span>
+            <span class="edition__status edition__status--gone">Gone</span>
+          </figcaption>
+        </figure>
+
+        <figure class="edition edition--wide">
+          <div class="edition__frame">
+            <svg class="edition__plate" aria-hidden="true" viewBox="0 0 350 250" preserveAspectRatio="xMidYMid slice">
+              <!-- suminagashi: straight stripes dragged into marbling -->
+              <rect x="-40" y="-40" width="430" height="330" fill="url(#marble-stripes)" filter="url(#ink-marble)" transform="rotate(-24 175 125)" />
+            </svg>
+          </div>
+          <figcaption class="edition__placard">
+            <span class="edition__title">Summit, Twice</span>
+            <span class="edition__meta">Screenprint, two passes</span>
+            <span class="edition__meta">70 x 100 cm</span>
+            <span class="edition__status">Available</span>
+          </figcaption>
+        </figure>
+
+        <figure class="edition edition--square">
+          <div class="edition__frame">
+            <svg class="edition__plate" aria-hidden="true" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+              <!-- a red sun sinking into an indigo tide -->
+              <circle cx="150" cy="128" r="64" class="edition__sun" filter="url(#ink-bleed)" />
+              <g class="edition__ink" fill="none" stroke-width="3" stroke-linecap="round" filter="url(#ink-bleed)">
+                <path d="M20 206 C70 194 110 214 150 204 C190 194 240 214 280 202" />
+                <path d="M34 232 C80 222 120 240 160 230 C200 222 240 238 268 228" />
+                <path d="M60 256 C100 248 140 262 176 254 C206 248 232 258 248 254" />
+              </g>
+            </svg>
+          </div>
+          <figcaption class="edition__placard">
+            <span class="edition__title">Null Vessel</span>
+            <span class="edition__meta">Ink on paper</span>
+            <span class="edition__meta">40 x 40 cm</span>
+            <span class="edition__status">Available</span>
+          </figcaption>
+        </figure>
+
+        <figure class="edition edition--tall">
+          <div class="edition__frame">
+            <div class="edition__plate edition__plate--sketch edition__plate--reach" aria-hidden="true"></div>
+          </div>
+          <figcaption class="edition__placard">
+            <span class="edition__title">Golden Hour Recoil</span>
+            <span class="edition__meta">Screenprint, hand finished</span>
+            <span class="edition__meta">50 x 50 cm</span>
+            <span class="edition__status edition__status--gone">Gone</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <!-- the poster's textures are SVG noise, so they stay sharp at any size -->
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+        <defs>
+          <filter id="stars-a" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1" seed="4" />
+            <feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0 0.88  26 0 0 0 -17.9" />
+          </filter>
+          <filter id="stars-b" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1" seed="11" />
+            <feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0 0.88  26 0 0 0 -17.9" />
+          </filter>
+          <!-- a denser band of stars, the milky way running across the panel -->
+          <filter id="stars-band" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" />
+            <feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0 0.88  18 0 0 0 -11" />
+          </filter>
+          <linearGradient id="band-fade" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0.25" stop-color="#fff" stop-opacity="0" />
+            <stop offset="0.5" stop-color="#fff" />
+            <stop offset="0.75" stop-color="#fff" stop-opacity="0" />
+          </linearGradient>
+          <mask id="band-mask" maskContentUnits="objectBoundingBox">
+            <rect width="1" height="1" fill="url(#band-fade)" />
+          </mask>
+          <!-- snow that breaks up into grain, like a stippled print -->
+          <filter id="snow-grain" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="noise" />
+            <feColorMatrix in="noise" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -22 0 0 0 9.2" result="dots" />
+            <feComposite in="SourceGraphic" in2="dots" operator="out" />
+          </filter>
+          <symbol id="night-panel" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" class="process__sky" />
+            <rect width="400" height="300" mask="url(#band-mask)" filter="url(#stars-band)" />
+          </symbol>
+          <path id="ridge-long" d="M0 420 L0 228 L38 206 L61 214 L102 176 L128 190 L171 150 L196 168 L226 142 L262 181 L301 166 L338 196 L372 184 L400 200 L400 420 L0 420 Z" />
+          <path id="ridge-peak" d="M0 60 L22 34 L30 40 L46 12 L58 30 L66 24 L90 60 Z" />
+        </defs>
+      </svg>
+
+      <div class="process__poster">
+        <header class="process__strip">
+          <svg class="process__peak" aria-hidden="true" viewBox="0 0 90 60"><use href="#ridge-peak" /></svg>
+          <span class="process__kanji" lang="ja" aria-hidden="true">一点物</span>
+          <svg class="process__peak process__peak--flip" aria-hidden="true" viewBox="0 0 90 60"><use href="#ridge-peak" /></svg>
+        </header>
+
+        <div class="process__top">
+          <figure class="process__feature">
+            <svg class="process__night" aria-hidden="true" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <use href="#night-panel" />
+              <rect width="400" height="300" filter="url(#stars-a)" />
+            </svg>
+            <!-- capped at its native 528px wide so it never gets stretched soft -->
+            <img class="process__feature-img" src="Images/kokonohitou.jpg" alt="" aria-hidden="true">
+            <div class="process__grain" aria-hidden="true"></div>
+          </figure>
+
+          <div class="process__titleblock">
+            <h2 class="process__heading">How<br> we<br> work</h2>
+            <svg class="process__heading-peak" aria-hidden="true" viewBox="0 0 90 60"><use href="#ridge-peak" /></svg>
+            <p class="process__intro">No factories, no reprints. Just the steps between an idea and a shirt.</p>
+          </div>
+        </div>
+
+        <ol class="process__list">
+          <li class="process__step">
+            <div class="process__art" aria-hidden="true">
+              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <use href="#night-panel" />
+                <rect width="400" height="300" filter="url(#stars-a)" />
+                <use href="#ridge-long" class="process__snow" filter="url(#snow-grain)" />
+              </svg>
+              <span class="process__marker">01</span>
+            </div>
+            <h3 class="process__title">Concept</h3>
+            <p class="process__desc">Every motif starts as a sketch pulled from what we can't stop thinking about.</p>
+          </li>
+          <li class="process__step">
+            <div class="process__art" aria-hidden="true">
+              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <use href="#night-panel" />
+                <rect width="400" height="300" filter="url(#stars-b)" />
+                <use href="#ridge-long" class="process__snow" filter="url(#snow-grain)" transform="translate(400 -30) scale(-1 1)" />
+              </svg>
+              <span class="process__marker">02</span>
+            </div>
+            <h3 class="process__title">Hand-print</h3>
+            <p class="process__desc">Each shirt is screen printed by hand, one at a time, no shortcuts.</p>
+          </li>
+          <li class="process__step">
+            <div class="process__art" aria-hidden="true">
+              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <use href="#night-panel" />
+                <rect width="400" height="300" filter="url(#stars-a)" transform="translate(400 0) scale(-1 1)" />
+                <use href="#ridge-long" class="process__snow" filter="url(#snow-grain)" transform="translate(0 -60)" />
+              </svg>
+              <span class="process__marker">03</span>
+            </div>
+            <h3 class="process__title">One run</h3>
+            <p class="process__desc">A design prints in a single small batch and is never repeated.</p>
+          </li>
+          <li class="process__step">
+            <div class="process__art" aria-hidden="true">
+              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <use href="#night-panel" />
+                <rect width="400" height="300" filter="url(#stars-b)" transform="translate(0 300) scale(1 -1)" />
+                <!-- the summit: the ridge climbs highest in the last panel -->
+                <use href="#ridge-long" class="process__snow" filter="url(#snow-grain)" transform="translate(400 -95) scale(-1 1)" />
+              </svg>
+              <span class="process__marker">04</span>
+            </div>
+            <h3 class="process__title">Gone for good</h3>
+            <p class="process__desc">Once a run sells out, it's retired. What's left is what's left.</p>
+          </li>
+        </ol>
+
+        <footer class="process__credits">
+          <span>Skybreak</span>
+          <span class="process__seal" lang="ja" aria-hidden="true">一</span>
+          <span>One of one</span>
+        </footer>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <!-- reaching for the last one: printed twice, slightly off register -->
+      <div class="footer__reach" aria-hidden="true">
+        <span class="footer__reach-red"></span>
+        <span class="footer__reach-line"></span>
+      </div>
+      <p class="footer__mark">Skybreak</p>
+      <p class="footer__line">Once it's printed, it's gone. No reprints, no restocks.</p>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link">Instagram</a>
+      </div>
+      <p class="footer__credit">Hands drawing by @skyrush98</p>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox__backdrop" data-close></div>
+    <div class="lightbox__panel" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+      <button class="lightbox__close" type="button" data-close aria-label="Close preview">&#10005;</button>
+      <div class="lightbox__art" id="lightbox-art"></div>
+      <h3 class="lightbox__title" id="lightbox-title"></h3>
+      <p class="lightbox__note" id="lightbox-note"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

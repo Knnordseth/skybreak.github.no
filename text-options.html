@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skybreak sign options</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body {
+    margin: 0;
+    background: var(--color-paper-dark);
+    font-family: var(--font-body);
+    color: var(--color-ink-on-dark);
+  }
+
+  .option {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 60vh;
+    padding: var(--space-lg) clamp(var(--space-sm), 5vw, var(--space-xl));
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-line-on-dark);
+  }
+
+  .option__label {
+    position: absolute;
+    top: var(--space-md);
+    left: clamp(var(--space-sm), 5vw, var(--space-xl));
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.6;
+  }
+
+  .option__figure {
+    position: relative;
+    height: 26rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .option__figure img {
+    height: 100%;
+    width: auto;
+    transform: scaleX(-1);
+    /* the source is black linework on a white jpg background; invert
+       first so the linework turns light, then screen-blend drops the
+       (now black) former-white background out against the dark page */
+    filter: invert(1);
+    mix-blend-mode: screen;
+  }
+
+  .option__sign {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.15;
+    max-width: 12ch;
+  }
+
+  /* option 1: neon tube sign */
+  .neon-bg {
+    background: radial-gradient(circle at 70% 50%, oklch(20% 0.05 270) 0%, var(--color-paper-dark) 65%);
+  }
+
+  .neon-text {
+    color: #fff;
+    text-shadow:
+      0 0 4px oklch(90% 0.05 25),
+      0 0 10px var(--color-accent),
+      0 0 22px var(--color-accent),
+      0 0 46px var(--color-accent);
+  }
+
+  /* option 2: brushed chrome sign */
+  .chrome-bg {
+    background: linear-gradient(180deg, oklch(16% 0.02 270), var(--color-paper-dark));
+  }
+
+  .chrome-text {
+    background: linear-gradient(180deg, #f4f4f4 0%, #b9b9b9 28%, #6b6b6b 48%, #f7f7f7 58%, #8f8f8f 78%, #eee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.5));
+  }
+
+  /* option 3: holographic sign, nods to the rainbow CRT bars in the inspo shot */
+  .holo-bg {
+    background: var(--color-paper-dark);
+  }
+
+  .holo-text {
+    background: linear-gradient(100deg, #ff3d81, #ffb03d, #f4ff3d, #3dffa6, #3db8ff, #a63dff, #ff3d81);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: holo-shift 7s linear infinite;
+  }
+
+  @keyframes holo-shift {
+    to { background-position: 300% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .holo-text {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .option {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .option__figure {
+      order: -1;
+      height: 18rem;
+    }
+
+    .option__sign {
+      justify-self: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <section class="option neon-bg">
+    <p class="option__label">Option 1, neon sign</p>
+    <p class="option__sign neon-text">One print.<br>One shirt.<br>Never again.</p>
+    <div class="option__figure">
+      <img src="Images/Asuka-drawing.jpg" alt="">
+    </div>
+  </section>
+
+  <section class="option chrome-bg">
+    <p class="option__label">Option 2, brushed chrome</p>
+    <p class="option__sign chrome-text">One print.<br>One shirt.<br>Never again.</p>
+    <div class="option__figure">
+      <img src="Images/Asuka-drawing.jpg" alt="">
+    </div>
+  </section>
+
+  <section class="option holo-bg">
+    <p class="option__label">Option 3, holographic</p>
+    <p class="option__sign holo-text">One print.<br>One shirt.<br>Never again.</p>
+    <div class="option__figure">
+      <img src="Images/Asuka-drawing.jpg" alt="">
+    </div>
+  </section>
+
+</body>
+</html>

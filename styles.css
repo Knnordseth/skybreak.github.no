@@ -1,0 +1,1600 @@
+/* Hallmark · macrostructure: custom (hero-to-grid descent) · genre: atmospheric
+ * theme: custom · vibe: "cybersigilism + Eva + JoJo + The Climber, light-to-dark"
+ * paper: oklch(96% 0.012 85) -> oklch(12% 0.018 270) · accent: oklch(58% 0.19 25)
+ * display: Space Grotesk · body: Inter
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  font-family: var(--font-body);
+  background: var(--color-paper-dark);
+  color: var(--color-ink-on-dark);
+}
+
+/* keeps a real heading in the outline where the visible one is kanji */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- the descent: dark throughout, the light comes from the sun ---------- */
+
+.descent {
+  background: var(--color-paper-dark);
+  color: var(--color-ink-on-dark);
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-md) clamp(var(--space-sm), 5vw, var(--space-xl));
+  color: var(--color-ink-on-dark);
+}
+
+.nav__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-md);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.nav__link {
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line-on-dark);
+  padding-bottom: 2px;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link:hover {
+  border-color: var(--color-accent);
+}
+
+.nav__link:focus-visible,
+.nav__mark:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl) clamp(var(--space-sm), 5vw, var(--space-xl));
+}
+
+/* first layer: night, with the sun's halo bleeding in from the right */
+.hero__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 75% at 96% 50%, oklch(46% 0.08 235 / 0.55) 0%, transparent 62%),
+    radial-gradient(ellipse 90% 60% at 80% 40%, oklch(30% 0.05 250 / 0.5) 0%, transparent 70%),
+    var(--color-paper-dark);
+}
+
+.hero__text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+  max-width: 34rem;
+  width: 100%;
+  margin-left: 0;
+}
+
+.hero__eyebrow {
+  margin: 0;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-on-dark);
+  opacity: 0.7;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal;
+  font-size: var(--text-display);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  /* brushed-chrome fill */
+  background: linear-gradient(180deg, #f4f4f4 0%, #b9b9b9 28%, #6b6b6b 48%, #f7f7f7 58%, #8f8f8f 78%, #eee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.5));
+}
+
+@supports not (background-clip: text) {
+  .hero__title {
+    background: none;
+    color: var(--color-ink-on-dark);
+    -webkit-text-fill-color: unset;
+  }
+}
+
+.hero__tagline {
+  margin: 0;
+  font-size: var(--text-lg);
+  max-width: 38ch;
+  color: var(--color-ink-on-dark);
+  opacity: 0.85;
+}
+
+.hero__cue {
+  margin-top: var(--space-lg);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-line-on-dark);
+  color: var(--color-ink-on-dark);
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: var(--text-md);
+  animation: cue-drift 2.2s var(--ease-in-out) infinite;
+}
+
+.hero__cue:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@keyframes cue-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* middle layer: above the night, below the text, starting just under the
+   eyebrow so the headline overlaps her */
+.hero__asuka {
+  position: absolute;
+  z-index: 1;
+  top: 14%;
+  left: 46%;
+  height: 80%;
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%) scaleX(-1);
+  /* source is black linework on white: inverting turns the lines light,
+     then screen drops the (now black) background out against the night */
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  /* fades the rectangular jpg edges out instead of a hard crop line */
+  -webkit-mask-image: radial-gradient(ellipse 62% 72% at 50% 36%, black 45%, transparent 92%);
+  mask-image: radial-gradient(ellipse 62% 72% at 50% 36%, black 45%, transparent 92%);
+}
+
+.hero__icon {
+  position: absolute;
+  z-index: 1;
+  width: 3rem;
+  color: var(--color-ink-on-dark);
+  opacity: 0.28;
+}
+
+.hero__icon--sigil {
+  top: 10%;
+  left: 8%;
+  width: 3.5rem;
+}
+
+.hero__icon--mecha {
+  bottom: 10%;
+  left: 6%;
+  width: 2.5rem;
+  opacity: 0.3;
+  transform: rotate(-8deg);
+}
+
+.hero__icon--stand {
+  top: 10%;
+  right: 34%;
+  width: 4rem;
+  opacity: 0.45;
+  transform: rotate(10deg);
+}
+
+.hero__icon--climb {
+  bottom: 10%;
+  right: 34%;
+  width: 3.25rem;
+}
+
+/* right-side reveal: a wavy-edged panel (not a hard vertical split) where
+   a soft sky-blue break in the clouds drifts over the hidden art */
+.hero__reveal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 40%;
+  min-width: 14rem;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 68% 46%,
+    oklch(99% 0.008 220) 0%,
+    var(--color-sky-2) 34%,
+    var(--color-sky-1) 100%
+  );
+  clip-path: url(#hero-sun-clip);
+  -webkit-clip-path: url(#hero-sun-clip);
+}
+
+.hero__reveal-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain, not cover: cover on a tall narrow panel zoomed into a slice of
+     the drawing instead of showing the figure */
+  object-fit: contain;
+  object-position: 100% 50%;
+  opacity: 0.9;
+  /* white-removal against the bright sun behind it */
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 78% 86% at 70% 50%, black 62%, transparent 97%);
+  mask-image: radial-gradient(ellipse 78% 86% at 70% 50%, black 62%, transparent 97%);
+  /* sits right of centre inside the sun, then scrolling shifts it sideways
+     so it pops rather than reading as a flat pasted-in picture */
+  transform: translateX(calc(26% + var(--hero-scroll, 0) * -34%)) scale(0.82);
+}
+
+/* the "break in the sky": a soft glow that drifts with scroll position
+   and breathes gently at rest, like light finding a gap in the clouds.
+   kept light so it hints at sunlight without burying the art under it */
+.hero__reveal-light {
+  position: absolute;
+  inset: -25%;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    42% 36% at 55% calc(20% + var(--scroll, 0) * 55%),
+    oklch(97% 0.015 220 / 0.65) 0%,
+    oklch(88% 0.05 235 / 0.4) 42%,
+    transparent 75%
+  );
+  animation: light-pulse 9s ease-in-out infinite;
+}
+
+@keyframes light-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+/* a rough sun rising off the right edge: spikes of deliberately unequal
+   length radiating left, slowly trading places so the rays never sit still */
+.sun-path {
+  animation: sun-flare 16s ease-in-out infinite;
+}
+
+@keyframes sun-flare {
+  0%, 100% {
+    d: path("M1,0.13 L0.512,0.168 L0.785,0.205 L0.232,0.262 L0.608,0.298 L0.175,0.351 L0.691,0.392 L0.063,0.436 L0.474,0.478 L0.712,0.521 L0.037,0.565 L0.611,0.612 L0.170,0.658 L0.715,0.702 L0.250,0.751 L0.733,0.795 L0.569,0.838 L1,0.87 Z");
+  }
+  50% {
+    d: path("M1,0.13 L0.831,0.168 L0.374,0.205 L0.740,0.262 L0.181,0.298 L0.658,0.351 L0.106,0.392 L0.581,0.436 L0.033,0.478 L0.110,0.521 L0.648,0.565 L0.044,0.612 L0.646,0.658 L0.203,0.702 L0.762,0.751 L0.405,0.795 L0.827,0.838 L1,0.87 Z");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__reveal-light,
+  .sun-path {
+    animation: none;
+  }
+
+  .hero__reveal-img {
+    /* scroll-linked parallax reads as motion sickness territory for some
+       visitors: keep the placement, drop the horizontal drift */
+    transform: translateX(26%) scale(0.82);
+  }
+}
+
+/* ---------- catalogue (dark zone) ---------- */
+
+.catalogue {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-2xl) clamp(var(--space-sm), 5vw, var(--space-xl)) var(--space-xl);
+  color: var(--color-ink-on-dark);
+}
+
+.catalogue__heading,
+.grid {
+  position: relative;
+  z-index: 2;
+}
+
+.catalogue__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.catalogue__guides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--color-ink-on-dark);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.11;
+  /* the guides thin out toward the edges, like a lens falling off */
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 56%, black 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 56%, black 30%, transparent 100%);
+}
+
+.catalogue__guides > * {
+  vector-effect: non-scaling-stroke;
+}
+
+.catalogue__guide--red {
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+}
+
+/* bleeds off the right edge, cream line over its red underdrawing */
+.catalogue__sketch {
+  position: absolute;
+  top: 6%;
+  right: -6rem;
+  width: clamp(18rem, 34vw, 34rem);
+  aspect-ratio: 1856 / 2400;
+  transform: rotate(4deg);
+}
+
+.catalogue__sketch-red,
+.catalogue__sketch-line {
+  position: absolute;
+  inset: 0;
+  -webkit-mask: center / contain no-repeat;
+  mask: center / contain no-repeat;
+}
+
+.catalogue__sketch-red {
+  background: var(--color-accent);
+  -webkit-mask-image: url("Images/vector/fisheye-red.svg");
+  mask-image: url("Images/vector/fisheye-red.svg");
+  opacity: 0.3;
+}
+
+.catalogue__sketch-line {
+  background: var(--color-ink-on-dark);
+  -webkit-mask-image: url("Images/vector/fisheye-line.svg");
+  mask-image: url("Images/vector/fisheye-line.svg");
+  opacity: 0.22;
+}
+
+/* the centrepiece sits on the bottom layer and the pieces orbit it */
+.wheel {
+  position: relative;
+}
+
+/* the adapting wheel, furthest back and turning against the pieces */
+.wheel__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  /* sized off the orbit radius plus a tile's worth of clearance, so the rim
+     always sits outside the pieces rather than running through them */
+  width: calc(var(--radius, 13rem) * 2 + 11rem);
+  aspect-ratio: 1 / 1;
+  height: auto;
+  color: var(--color-line-on-dark);
+  opacity: 0.22;
+  transform: translate(-50%, -50%) rotate(calc(var(--wheel, 0) * -0.9turn));
+}
+
+.wheel__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: min(20rem, 62%);
+  transform: translate(-50%, -50%);
+  /* black linework on white: invert then screen so it glows on the dark */
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  -webkit-mask-image: radial-gradient(ellipse 70% 78% at 50% 45%, black 55%, transparent 95%);
+  mask-image: radial-gradient(ellipse 70% 78% at 50% 45%, black 55%, transparent 95%);
+}
+
+.catalogue__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-s);
+  margin: 0 0 var(--space-xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: var(--space-md);
+}
+
+.tile {
+  appearance: none;
+  border: 1px solid var(--color-line-on-dark);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+.tile:hover,
+.tile:focus-visible {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.tile__art {
+  color: var(--color-line-on-dark);
+  aspect-ratio: 1 / 1;
+}
+
+.tile:hover .tile__art,
+.tile:focus-visible .tile__art {
+  color: var(--color-accent);
+}
+
+.tile__art--flip {
+  transform: scaleX(-1);
+}
+
+.tile__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-md);
+  margin: 0;
+}
+
+.tile__label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* the orbit, on screens wide enough to hold a ring of eight pieces.
+   narrow screens keep the stacked grid above, which stays readable. */
+@media (min-width: 701px) {
+  .wheel {
+    width: min(50rem, 94vw);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    --radius: clamp(9rem, 23vw, 16rem);
+    --tile-size: clamp(7.5rem, 15vw, 10rem);
+  }
+
+  .grid {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .tile {
+    /* each piece is placed at its own angle on the ring, then counter
+       rotated by the same amount so the label stays upright as it turns */
+    --angle: calc((var(--i, 0) / var(--count, 8)) * 1turn + var(--wheel, 0) * 0.6turn);
+    --orbit:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(calc(var(--radius) * -1))
+      rotate(calc(var(--angle) * -1));
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--tile-size);
+    padding: var(--space-sm);
+    gap: var(--space-2xs);
+    background: oklch(12% 0.018 270 / 0.72);
+    backdrop-filter: blur(2px);
+    transform: var(--orbit);
+  }
+
+  .tile:hover,
+  .tile:focus-visible {
+    transform: var(--orbit) scale(1.06);
+  }
+
+  .tile__name {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ---------- flash: a light section, a paper sheet pinned to the
+   dark wall, with a torn edge echoing the sun's rough silhouette ---------- */
+
+.flash {
+  position: relative;
+  margin: var(--space-2xl) 0;
+  padding: var(--space-2xl) clamp(var(--space-sm), 5vw, var(--space-xl));
+  background: var(--color-paper-light);
+  color: var(--color-ink-on-light);
+  clip-path: polygon(
+    0% 2.2%, 9% 0.4%, 21% 2.6%, 33% 0.7%, 46% 2.9%, 58% 0.5%,
+    71% 2.4%, 84% 0.6%, 93% 2.7%, 100% 1.1%,
+    100% 97.6%, 91% 99.5%, 78% 97.2%, 66% 99.4%, 53% 97.1%,
+    40% 99.6%, 27% 97.4%, 15% 99.3%, 6% 97.5%, 0% 99.1%
+  );
+}
+
+/* the herd runs behind everything else on the sheet */
+.flash__head,
+.flash__sheet,
+.flash__note {
+  position: relative;
+  z-index: 1;
+}
+
+/* pencilled figure drafts in the sheet margins, behind the tiles */
+.flash__study {
+  position: absolute;
+  z-index: 0;
+  width: clamp(12rem, 17vw, 17rem);
+  background: var(--color-ink-on-light);
+  -webkit-mask: center / contain no-repeat;
+  mask: center / contain no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.flash__study--64 {
+  top: 34%;
+  left: calc(50% - 31rem - 13rem);
+  aspect-ratio: 1472 / 2256;
+  -webkit-mask-image: url("Images/vector/pose-64.svg");
+  mask-image: url("Images/vector/pose-64.svg");
+  transform: rotate(-8deg);
+}
+
+.flash__study--crawl {
+  top: 52%;
+  right: calc(50% - 31rem - 14rem);
+  aspect-ratio: 1470 / 2162;
+  -webkit-mask-image: url("Images/vector/pose-crawl.svg");
+  mask-image: url("Images/vector/pose-crawl.svg");
+  transform: rotate(6deg);
+}
+
+.herd {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--color-ink-on-light);
+  opacity: 0.13;
+}
+
+/* horses face right, so they run right, entering off the left edge */
+.herd__horse {
+  position: absolute;
+  top: var(--lane);
+  left: 0;
+  width: var(--size);
+  aspect-ratio: 36 / 23;
+  animation: herd-run var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes herd-run {
+  from {
+    transform: translateX(calc(-1 * var(--size) - 2rem));
+  }
+  to {
+    transform: translateX(calc(100vw + 2rem));
+  }
+}
+
+/* three traced gallop phases; each shows for a third of the stride.
+   the negative delays put frame 2 and 3 a third and two thirds along */
+.herd__frame {
+  --stride: 0.5s;
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("Images/vector/horse-1.svg") center / contain no-repeat;
+  mask: url("Images/vector/horse-1.svg") center / contain no-repeat;
+  opacity: 0;
+  animation: herd-stride var(--stride) step-end var(--phase, 0s) infinite;
+}
+
+.herd__frame:nth-child(2) {
+  -webkit-mask-image: url("Images/vector/horse-2.svg");
+  mask-image: url("Images/vector/horse-2.svg");
+  animation-delay: calc(var(--phase, 0s) - var(--stride) * 2 / 3);
+}
+
+.herd__frame:nth-child(3) {
+  -webkit-mask-image: url("Images/vector/horse-3.svg");
+  mask-image: url("Images/vector/horse-3.svg");
+  animation-delay: calc(var(--phase, 0s) - var(--stride) / 3);
+}
+
+@keyframes herd-stride {
+  0% {
+    opacity: 1;
+  }
+  33.333% {
+    opacity: 0;
+  }
+}
+
+.flash__head {
+  max-width: 44rem;
+  margin: 0 auto var(--space-xl);
+  text-align: center;
+}
+
+/* the hinomaru-and-column mark: a red sun over 一生, "for life" */
+.flash__mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.flash__sun {
+  width: clamp(3.5rem, 8vw, 5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent);
+  filter: url(#ink-bleed);
+}
+
+.flash__kanji {
+  writing-mode: vertical-rl;
+  font-family: var(--font-kanji);
+  font-weight: 900;
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+
+.flash__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-s);
+  margin: 0 0 var(--space-xs);
+}
+
+.flash__intro {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.flash__sheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: var(--space-lg) var(--space-md);
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.flash__piece {
+  position: relative;
+  appearance: none;
+  background: var(--color-paper-light);
+  border: 1px solid oklch(18% 0.02 270 / 0.2);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: var(--space-md) var(--space-sm) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* straightens up and lifts off the sheet, like unpinning one to look at it */
+.flash__piece:hover,
+.flash__piece:focus-visible {
+  transform: rotate(0deg) translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 24px oklch(18% 0.02 270 / 0.18);
+}
+
+.flash__piece:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.flash__no {
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  opacity: 0.45;
+}
+
+.flash__art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  color: var(--color-ink-on-light);
+}
+
+.flash__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.flash__meta {
+  margin: 0;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+}
+
+.flash__piece--claimed .flash__art {
+  opacity: 0.32;
+}
+
+.flash__piece--claimed .flash__meta {
+  color: var(--color-accent);
+  opacity: 0.9;
+}
+
+/* the struck line that marks a number as gone from the sheet */
+.flash__piece--claimed::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 48%;
+  height: 2px;
+  background: var(--color-accent);
+  opacity: 0.65;
+  transform: rotate(-8deg);
+}
+
+.flash__note {
+  max-width: 44rem;
+  margin: var(--space-xl) auto 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  opacity: 0.6;
+}
+
+/* ---------- editions: an indigo-dyed wall (aizome) hung with paper
+   prints, headed like a dictionary entry for 生き甲斐 ---------- */
+
+.editions {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-2xl) 0;
+  background: var(--color-indigo-deep);
+  color: var(--color-ink-on-dark);
+}
+
+/* Hokusai's Great Wave (public domain, traced to vector) as a dyed
+   mural across the whole wall, crest behind the heading */
+.editions__mural {
+  position: absolute;
+  inset: 0;
+  background: var(--color-indigo-light);
+  -webkit-mask: url("Images/vector/wave.svg") left bottom / auto 100% no-repeat;
+  mask: url("Images/vector/wave.svg") left bottom / auto 100% no-repeat;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.editions__head {
+  position: relative;
+  max-width: 62rem;
+  padding: 0 clamp(var(--space-sm), 5vw, var(--space-xl));
+  margin-bottom: var(--space-lg);
+}
+
+.editions__eyebrow {
+  margin: 0 0 var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.editions__heading {
+  margin: 0;
+}
+
+.editions__word {
+  display: block;
+  font-family: var(--font-kanji);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 11vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.editions__reading {
+  margin: var(--space-xs) 0 var(--space-sm);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  opacity: 0.75;
+}
+
+.editions__reading em {
+  margin-left: var(--space-xs);
+}
+
+.editions__intro {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.editions__rail {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  padding: var(--space-lg) clamp(var(--space-sm), 5vw, var(--space-xl));
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.editions__rail:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+}
+
+/* the picture rail the works hang from. absolutely positioned children
+   resolve against the visible box, not the scrolled width, so it has to be
+   overwide to keep running behind the works further along the rail */
+.editions__rail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 300%;
+  top: var(--space-lg);
+  border-top: 1px solid var(--color-line-on-dark);
+  opacity: 0.5;
+}
+
+.edition {
+  flex: none;
+  margin: 0;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* washi mat: cream paper with a soft fibre texture drawn as SVG noise */
+.edition__frame {
+  padding: var(--space-sm);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.4' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.3 0 0 0 0 0.4 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
+    var(--color-paper-light);
+  box-shadow: 0 1rem 2.5rem oklch(8% 0.05 265 / 0.55);
+}
+
+.edition__plate {
+  display: block;
+  color: var(--color-indigo);
+}
+
+.edition--tall .edition__plate {
+  width: clamp(11rem, 20vw, 15rem);
+  aspect-ratio: 5 / 7;
+}
+
+.edition--square .edition__plate {
+  width: clamp(10rem, 18vw, 13rem);
+  aspect-ratio: 1 / 1;
+}
+
+.edition--wide .edition__plate {
+  width: clamp(14rem, 27vw, 21rem);
+  aspect-ratio: 7 / 5;
+}
+
+/* traced ink sketches, printed in indigo on the washi */
+.edition__plate--sketch {
+  background: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.edition__plate--point {
+  -webkit-mask-image: url("Images/vector/josuke-point.svg");
+  mask-image: url("Images/vector/josuke-point.svg");
+}
+
+.edition__plate--reach {
+  -webkit-mask-image: url("Images/vector/josuke-reach.svg");
+  mask-image: url("Images/vector/josuke-reach.svg");
+}
+
+.edition__ink {
+  stroke: currentColor;
+}
+
+.edition__ink-fill {
+  fill: currentColor;
+}
+
+.edition__sun {
+  fill: var(--color-accent);
+}
+
+.wash-stop {
+  stop-color: var(--color-indigo);
+}
+
+.marble-stripe {
+  fill: var(--color-indigo);
+}
+
+.edition__placard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 16rem;
+}
+
+.edition__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.edition__meta {
+  font-size: var(--text-xs);
+  opacity: 0.6;
+}
+
+.edition__status {
+  margin-top: var(--space-3xs);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-on-indigo);
+}
+
+.edition__status--gone {
+  color: var(--color-ink-on-dark);
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* ---------- process: a manga poster pinned to the dark wall, framed
+   panels of stippled night sky climbing to a summit ---------- */
+
+.process {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-xl) clamp(var(--space-sm), 5vw, var(--space-xl)) var(--space-2xl);
+}
+
+.process__poster {
+  --poster-ink: var(--color-ink-on-light);
+  --poster-rule: 3px solid var(--poster-ink);
+  position: relative;
+  z-index: 1;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(var(--space-xs), 2.5vw, var(--space-md));
+  display: grid;
+  gap: clamp(var(--space-xs), 2vw, var(--space-sm));
+  background: var(--color-paper-light);
+  color: var(--poster-ink);
+  box-shadow: 0 1.5rem 4rem oklch(0% 0 0 / 0.5);
+}
+
+/* paper tooth over the whole sheet, drawn as SVG noise so it never pixelates */
+.process__poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.process__strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--poster-ink);
+  color: var(--color-paper-light);
+}
+
+.process__kanji {
+  font-family: var(--font-kanji);
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: 0.15em;
+}
+
+.process__peak {
+  width: clamp(3rem, 8vw, 5.5rem);
+  fill: currentColor;
+  filter: url(#snow-grain);
+}
+
+.process__peak--flip {
+  transform: scaleX(-1);
+}
+
+.process__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(var(--space-xs), 2vw, var(--space-sm));
+}
+
+.process__feature {
+  position: relative;
+  margin: 0;
+  min-height: 22rem;
+  overflow: hidden;
+  border: var(--poster-rule);
+  background: var(--color-paper-dark);
+}
+
+.process__night {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.process__sky {
+  fill: var(--color-paper-dark);
+}
+
+/* screen drops the photo's black sky so the stars show through it */
+.process__feature-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 528px);
+  height: auto;
+  mix-blend-mode: screen;
+  filter: grayscale(1) contrast(1.15);
+  /* feathers the photo's left and top edges into the star field */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 18%), linear-gradient(to bottom, transparent, black 15%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, black 18%), linear-gradient(to bottom, transparent, black 15%);
+  mask-composite: intersect;
+}
+
+.process__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.process__titleblock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-xs) 0 0;
+}
+
+.process__heading {
+  margin: 0;
+  font-family: var(--font-poster);
+  font-weight: 400;
+  font-size: clamp(4rem, 12vw, 9.5rem);
+  line-height: 0.86;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* a small peak sitting on the heading, as on the inspiration poster */
+.process__heading-peak {
+  position: absolute;
+  top: 18%;
+  right: 4%;
+  width: clamp(4rem, 10vw, 7rem);
+  fill: var(--poster-ink);
+  filter: url(#snow-grain);
+}
+
+.process__intro {
+  margin: var(--space-sm) 0 0;
+  max-width: 30ch;
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.process__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(var(--space-xs), 2vw, var(--space-sm));
+}
+
+.process__step {
+  display: flex;
+  flex-direction: column;
+}
+
+.process__art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: var(--poster-rule);
+  background: var(--color-paper-dark);
+}
+
+.process__art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.process__snow {
+  fill: var(--color-paper-light);
+}
+
+.process__marker {
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-xs);
+  font-family: var(--font-poster);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  line-height: 1;
+  color: var(--color-paper-light);
+}
+
+.process__title {
+  margin: var(--space-xs) 0 var(--space-3xs);
+  font-family: var(--font-poster);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.process__desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.process__credits {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-2xs);
+  border-top: var(--poster-rule);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* hanko stamp, the one spot of the accent thread on the poster */
+.process__seal {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-paper-light);
+  font-family: var(--font-kanji);
+  font-weight: 900;
+  font-size: 1rem;
+  transform: rotate(-4deg);
+}
+
+@media (max-width: 860px) {
+  .process__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process__titleblock {
+    order: -1;
+  }
+
+  .process__heading br {
+    display: none;
+  }
+
+  .process__heading-peak {
+    display: none;
+  }
+
+  .process__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .process__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process__feature {
+    min-height: 16rem;
+  }
+}
+
+/* ---------- footer (dark zone) ---------- */
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  min-height: 44rem;
+  padding: var(--space-xl) clamp(var(--space-sm), 5vw, var(--space-xl)) var(--space-2xl);
+  color: var(--color-ink-on-dark);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer > :not(.footer__reach) {
+  position: relative;
+  z-index: 1;
+}
+
+/* rises from below the fold, hands first; the body is cut off by the page */
+.footer__reach {
+  position: absolute;
+  z-index: 0;
+  top: var(--space-md);
+  right: clamp(-2rem, 6vw, 8rem);
+  width: clamp(16rem, 30vw, 26rem);
+  aspect-ratio: 1413 / 2508;
+  pointer-events: none;
+  /* fades out at the waist, and off the left edge where the drawing's hand
+     is cropped, so neither ends on a hard line */
+  -webkit-mask-image:
+    linear-gradient(to bottom, black 58%, transparent 82%),
+    linear-gradient(to right, transparent, black 22%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, black 58%, transparent 82%),
+    linear-gradient(to right, transparent, black 22%);
+  mask-composite: intersect;
+}
+
+.footer__reach-red,
+.footer__reach-line {
+  position: absolute;
+  inset: 0;
+  -webkit-mask: url("Images/vector/hands.svg") center / contain no-repeat;
+  mask: url("Images/vector/hands.svg") center / contain no-repeat;
+}
+
+/* the red pass lands a few pixels off, like a misregistered screenprint */
+.footer__reach-red {
+  background: var(--color-accent);
+  opacity: 0.22;
+  transform: translate(7px, -5px);
+}
+
+.footer__reach-line {
+  background: var(--color-ink-on-dark);
+  opacity: 0.3;
+}
+
+.footer__credit {
+  margin: auto 0 0;
+  padding-top: var(--space-xl);
+  font-size: var(--text-xs);
+  opacity: 0.4;
+}
+
+.footer__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+}
+
+.footer__line {
+  margin: 0;
+  opacity: 0.7;
+  font-size: var(--text-sm);
+}
+
+.footer__social-link {
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line-on-dark);
+}
+
+.footer__social-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-md);
+  z-index: 10;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: oklch(10% 0.01 270 / 0.72);
+}
+
+.lightbox__panel {
+  position: relative;
+  background: var(--color-paper-dark);
+  color: var(--color-ink-on-dark);
+  border: 1px solid var(--color-line-on-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  max-width: min(26rem, 100%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: panel-in var(--dur-base) var(--ease-out);
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-on-dark);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.lightbox__close:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.lightbox__art {
+  color: var(--color-accent);
+  max-width: 12rem;
+  margin: 0 auto;
+}
+
+.lightbox__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.lightbox__note {
+  font-size: var(--text-sm);
+  opacity: 0.7;
+  margin: 0;
+  text-align: center;
+}
+
+/* ---------- motion & accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cue {
+    animation: none;
+  }
+
+  .tile,
+  .lightbox__panel {
+    animation: none;
+    transition-duration: var(--dur-fast);
+  }
+
+  .tile {
+    /* hold the ring still rather than spinning it on scroll */
+    --angle: calc((var(--i, 0) / var(--count, 8)) * 1turn);
+  }
+
+  .wheel__ring {
+    transform: translate(-50%, -50%);
+  }
+
+  /* keeps the orbit placement, drops the lift/scale; falls back to none
+     on narrow screens where there is no orbit transform to preserve */
+  .tile:hover,
+  .tile:focus-visible {
+    transform: var(--orbit, none);
+  }
+
+  .herd__horse {
+    animation: none;
+    left: var(--rest);
+  }
+
+  .herd__frame {
+    animation: none;
+  }
+
+  .herd__frame:first-child {
+    opacity: 1;
+  }
+
+  /* leave the sheet pinned as it lies rather than straightening on hover */
+  .flash__piece,
+  .flash__piece:hover,
+  .flash__piece:focus-visible {
+    transform: rotate(var(--tilt, 0deg));
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+  .hero__asuka {
+    height: 62%;
+    top: 22%;
+  }
+
+  .hero__reveal {
+    width: 22%;
+    min-width: 0;
+  }
+
+  .hero__icon--stand,
+  .hero__icon--climb {
+    right: 26%;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* no margin left beside the sheet to pin them in */
+  .flash__study {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogue__sketch {
+    right: -8rem;
+    opacity: 0.6;
+  }
+
+  .footer__reach {
+    right: -5rem;
+  }
+
+  .hero {
+    min-height: 76vh;
+  }
+
+  .hero__asuka {
+    height: 50%;
+    top: 26%;
+  }
+
+  .hero__reveal {
+    display: none;
+  }
+
+  .hero__icon--mecha,
+  .hero__icon--stand {
+    display: none;
+  }
+
+  .wheel__center {
+    width: min(16rem, 70%);
+    opacity: 0.45;
+  }
+
+  .wheel__ring {
+    /* no orbit at this width, so size it to the column instead */
+    width: min(22rem, 96%);
+  }
+
+  .catalogue__heading {
+    margin-bottom: var(--space-lg);
+  }
+}
