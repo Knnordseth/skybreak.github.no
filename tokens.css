@@ -27,6 +27,14 @@
   --color-sky-1: oklch(88% 0.05 235);
   --color-sky-2: oklch(96% 0.02 220);
 
+  /* product studio: plain warm-grey sweep and off-white cotton */
+  --color-studio-1: oklch(95% 0.004 90);
+  --color-studio-2: oklch(86% 0.006 90);
+  --color-cloth: oklch(98.5% 0.004 90);
+  --color-cloth-rib: oklch(92% 0.006 90);
+  --color-cloth-shade: oklch(87% 0.008 85);
+  --color-seam: oklch(78% 0.008 85);
+
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   /* condensed poster type, and kanji for the poster, art and tattoo marks */

@@ -515,6 +515,89 @@ a {
   margin: 0;
 }
 
+/* ---------- product mockup: a real print on a drawn tee, shot on a
+   plain studio sweep ---------- */
+
+.garment {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(ellipse 75% 70% at 50% 42%, var(--color-studio-1) 40%, var(--color-studio-2));
+}
+
+.garment__tee {
+  width: 86%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0.6rem 0.8rem oklch(0% 0 0 / 0.16));
+}
+
+.garment__cloth {
+  fill: var(--color-cloth);
+}
+
+/* multiply drops what's left of the photo's fabric into the cloth */
+.garment__print {
+  mix-blend-mode: multiply;
+}
+
+.garment__grain {
+  fill: var(--color-cloth);
+  mix-blend-mode: multiply;
+  opacity: 0.28;
+}
+
+.garment__shade {
+  fill: url(#tee-shade-x);
+  mix-blend-mode: multiply;
+}
+
+.garment__shade-edge {
+  stop-color: var(--color-cloth-shade);
+}
+
+.garment__folds {
+  stroke: var(--color-cloth-shade);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+.garment__trim {
+  stroke: var(--color-seam);
+  stroke-width: 1.2;
+}
+
+.garment__rib {
+  stroke: var(--color-cloth-rib);
+}
+
+.garment__inside {
+  fill: var(--color-cloth-rib);
+  stroke: none;
+}
+
+/* the neck tag, the one spot of the accent thread */
+.garment__label {
+  fill: var(--color-accent);
+  stroke: none;
+}
+
+.garment__photo,
+.garment__cutout {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.garment__cutout {
+  object-fit: contain;
+  padding: 7%;
+  filter: drop-shadow(0 0.6rem 0.8rem oklch(0% 0 0 / 0.16));
+}
+
 /* the orbit, on screens wide enough to hold a ring of eight pieces.
    narrow screens keep the stacked grid above, which stays readable. */
 @media (min-width: 701px) {
@@ -1193,7 +1276,7 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(var(--space-xs), 2vw, var(--space-sm));
 }
 
@@ -1202,22 +1285,52 @@ a {
   flex-direction: column;
 }
 
+/* the phone photos are 3:4 already, so the panels match and nothing is lost */
 .process__art {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   border: var(--poster-rule);
   background: var(--color-paper-dark);
 }
 
-.process__art svg {
+/* printed-poster tone: ink-dark greyscale with the paper's warmth laid over,
+   back to the real colours on hover */
+.process__photo {
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+  filter: grayscale(1) contrast(1.2) brightness(0.95) sepia(0.18);
+  transition: filter var(--dur-base) var(--ease-out), transform 600ms var(--ease-out);
 }
 
-.process__snow {
-  fill: var(--color-paper-light);
+.process__step:hover .process__photo {
+  filter: none;
+  transform: scale(1.03);
+}
+
+/* a second frame pinned over the corner, like a snapshot on the sheet */
+.process__inset {
+  position: absolute;
+  right: 6%;
+  bottom: 5%;
+  width: 42%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  /* the carved figure, not the clamp below it */
+  object-position: 60% 38%;
+  border: 4px solid var(--color-paper-light);
+  box-shadow: 0 0.4rem 1rem oklch(0% 0 0 / 0.35);
+  transform: rotate(4deg);
+  filter: grayscale(1) contrast(1.15) sepia(0.18);
+  transition: filter var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+
+.process__step:hover .process__inset {
+  filter: none;
+  transform: rotate(1deg) scale(1.04);
 }
 
 .process__marker {
@@ -1228,6 +1341,8 @@ a {
   font-size: clamp(2.25rem, 4vw, 3rem);
   line-height: 1;
   color: var(--color-paper-light);
+  /* the photos can be bright where the number sits */
+  text-shadow: 0 0.1em 0.5em oklch(0% 0 0 / 0.55);
 }
 
 .process__title {
@@ -1293,11 +1408,25 @@ a {
   .process__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* five steps in two columns: the last one closes the sheet full width */
+  .process__step:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .process__step:last-child .process__art {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 @media (max-width: 480px) {
   .process__list {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process__art,
+  .process__step:last-child .process__art {
+    aspect-ratio: 4 / 5;
   }
 
   .process__feature {
@@ -1480,6 +1609,82 @@ a {
   text-align: center;
 }
 
+/* a real shirt opens as a plain product page: studio grey, big garment,
+   small spaced caps */
+.lightbox--product .lightbox__panel {
+  max-width: min(36rem, 100%);
+  max-height: calc(100vh - 2 * var(--space-md));
+  overflow-y: auto;
+  padding: var(--space-md);
+  background: var(--color-studio-1);
+  color: var(--color-ink-on-light);
+  border-color: transparent;
+  border-radius: 0;
+}
+
+.lightbox--product .lightbox__close {
+  z-index: 1;
+  border-color: var(--color-line-on-light);
+  /* stays readable over the hanger photo */
+  background: var(--color-studio-1);
+}
+
+.lightbox--product .lightbox__art {
+  width: 100%;
+  max-width: none;
+}
+
+.lightbox--product .lightbox__title {
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lightbox--product .lightbox__note {
+  font-size: var(--text-xs);
+}
+
+.lightbox__views {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.lightbox__views[hidden] {
+  display: none;
+}
+
+.lightbox__view {
+  appearance: none;
+  padding: var(--space-3xs) 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: inherit;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.lightbox__view:hover,
+.lightbox__view[aria-pressed="true"] {
+  opacity: 1;
+}
+
+.lightbox__view[aria-pressed="true"] {
+  border-bottom-color: currentColor;
+}
+
+.lightbox__view:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 /* ---------- motion & accessibility ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1507,6 +1712,14 @@ a {
   .tile:hover,
   .tile:focus-visible {
     transform: var(--orbit, none);
+  }
+
+  .process__step:hover .process__photo {
+    transform: none;
+  }
+
+  .process__step:hover .process__inset {
+    transform: rotate(4deg);
   }
 
   .herd__horse {

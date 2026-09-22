@@ -86,8 +86,25 @@
   const products = [
     { id: "ward-01", name: "Ward // 01", art: "sigil", flip: false, note: "Print concept, radial linework." },
     { id: "null-sigil", name: "Null Sigil", art: "sigil", flip: true, note: "Print concept, radial linework." },
-    { id: "unit-directive", name: "Unit Directive", art: "mecha", flip: false, note: "Print concept, panel linework." },
-    { id: "sync-ratio", name: "Sync Ratio", art: "mecha", flip: true, note: "Print concept, panel linework." },
+    // Real shirts: `print` is the print cropped from a photo, laid onto a drawn
+    // tee. Once there's a proper product photo (transparent PNG), set `cutout`
+    // to its path and it replaces the drawn back view.
+    {
+      id: "sit-still",
+      name: "Sit Still",
+      print: "Images/products/sit-still-print.jpg",
+      cutout: null,
+      worn: { src: "Images/works/web/pair.jpg", focus: "22% 55%" },
+      note: "Relief print on a white tee, from a hand-carved block.",
+    },
+    {
+      id: "two-hold",
+      name: "Two Hold",
+      print: "Images/products/two-hold-print.jpg",
+      cutout: null,
+      worn: { src: "Images/works/web/one-run.jpg", focus: "20% 55%" },
+      note: "Relief print on a white tee, from a hand-carved block.",
+    },
     { id: "stand-proud", name: "Stand Proud", art: "stand", flip: false, note: "Print concept, dynamic linework." },
     { id: "golden-recoil", name: "Golden Recoil", art: "stand", flip: true, note: "Print concept, dynamic linework." },
     { id: "ascent-line", name: "Ascent Line", art: "climber", flip: false, note: "Print concept, route linework." },
@@ -113,10 +130,46 @@
   const lightboxArt = document.getElementById("lightbox-art");
   const lightboxTitle = document.getElementById("lightbox-title");
   const lightboxNote = document.getElementById("lightbox-note");
+  const lightboxViews = document.getElementById("lightbox-views");
 
   let lastFocused = null;
 
-  function renderArt(container, product) {
+  const garmentViews = [
+    { id: "back", label: "Back" },
+    { id: "front", label: "Front" },
+    { id: "worn", label: "Hanger" },
+  ];
+
+  // The tee shapes, shading and fabric filters are defined once in index.html
+  // (#tee-*), so each mockup only references them.
+  function garment(product, view) {
+    if (view === "worn") {
+      return `<img class="garment__photo" src="${product.worn.src}" style="object-position: ${product.worn.focus}" alt="${product.name}, the printed shirt on a hanger">`;
+    }
+    if (view === "back" && product.cutout) {
+      return `<img class="garment__cutout" src="${product.cutout}" alt="${product.name}, back of the shirt">`;
+    }
+    const print = view === "back"
+      ? `<image class="garment__print" href="${product.print}" x="134" y="104" width="132" height="132" filter="url(#print-lift)" />`
+      : "";
+    return `
+      <svg class="garment__tee" viewBox="0 0 400 440" role="img" aria-label="${product.name}, ${view} of the shirt">
+        <use href="#tee-${view}" class="garment__cloth" />
+        ${print}
+        <use href="#tee-${view}" class="garment__grain" filter="url(#fabric-grain)" />
+        <use href="#tee-${view}" class="garment__shade" />
+        <use href="#tee-folds" class="garment__folds" />
+        <use href="#tee-${view}-trim" class="garment__trim" />
+      </svg>`;
+  }
+
+  function renderArt(container, product, view = "back") {
+    container.classList.toggle("garment", Boolean(product.print));
+    if (product.print) {
+      container.classList.remove("tile__art--flip");
+      container.innerHTML = garment(product, view);
+      return;
+    }
     container.innerHTML = artwork[product.art]();
     if (product.flip) {
       container.classList.add("tile__art--flip");
@@ -142,7 +195,7 @@
 
     const label = document.createElement("p");
     label.className = "tile__label";
-    label.textContent = "Print concept";
+    label.textContent = product.print ? "Hand-printed" : "Print concept";
 
     button.append(art, name, label);
     button.addEventListener("click", () => openLightbox(product, button));
@@ -186,11 +239,33 @@
   function openLightbox(piece, trigger) {
     lastFocused = trigger;
     renderArt(lightboxArt, piece);
+    renderViews(piece);
+    lightbox.classList.toggle("lightbox--product", Boolean(piece.print));
     lightboxTitle.textContent = piece.name;
     lightboxNote.textContent = piece.note;
     lightbox.hidden = false;
     lightbox.querySelector(".lightbox__close").focus();
     document.addEventListener("keydown", onLightboxKeydown);
+  }
+
+  // back / front / hanger switch, only for real shirts
+  function renderViews(piece) {
+    lightboxViews.replaceChildren();
+    lightboxViews.hidden = !piece.print;
+    if (!piece.print) return;
+
+    garmentViews.forEach((view, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "lightbox__view";
+      button.textContent = view.label;
+      button.setAttribute("aria-pressed", String(index === 0));
+      button.addEventListener("click", () => {
+        renderArt(lightboxArt, piece, view.id);
+        lightboxViews.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+      });
+      lightboxViews.appendChild(button);
+    });
   }
 
   function closeLightbox() {
@@ -208,7 +283,9 @@
     }
     if (event.key !== "Tab") return;
 
-    const focusable = lightbox.querySelectorAll("button, [href]");
+    // a[href], not [href]: the mockup's SVG <use href> would otherwise count
+    // as focusable and break the trap
+    const focusable = lightbox.querySelectorAll("button:not([hidden]), a[href]");
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
 
